@@ -1,0 +1,28 @@
+----  documentación crear sistemas de gestin it -------------
+
+1. creamos una carpeta con el monbre del proyecto 
+	desdes windows -> ingresamos a simbolo de sistemas
+	mkdir nombreCarpeta
+	- ingresamos a la carpeta que hemos creado
+	cd nombreCarpeta
+
+1.1 Creamos entorno virtual para trabajar con fast api
+	python -m venv venv
+
+1.2 Activar entorno virtual 
+	venv\Scripts\activate
+	
+1.3 Instalamos dependencias necesarias 
+	# Instalar FastAPI y servidor
+	pip install fastapi uvicorn
+
+	# Instalar SQLAlchemy y Alembic para base de datos
+	pip install sqlalchemy alembic
+
+	# Instalar driver para SQL Server
+	pip install pyodbc
+
+	# Instalar variables de entorno
+	pip install python-dotenv
+
+	
