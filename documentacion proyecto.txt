@@ -25,4 +25,16 @@
 	# Instalar variables de entorno
 	pip install python-dotenv
 
+NOTA: para correr es proyecto en otro computador debemos correr los siguiente comandos 
+	# Si existe, instalar todo:
+	pip install -r requirements.txt
+	# Si NO existe, instalas lo necesario:
+	pip install fastapi uvicorn sqlalchemy alembic pydantic
+
+2 crear migraciones en la carpeta database/ __init__.py
+	 #instalamos alembic con pip install alembic
+	 # inicializamos alembic con alembic init alembic
+2.1 creamos una carpeta models y dentro de ella creamos un archivo porcada modelo de tabla de nuestra db
+	para ejecutar migraciones podemos usar comandos como 
+	alembic upgrade head    (para actualizar db)
 	
