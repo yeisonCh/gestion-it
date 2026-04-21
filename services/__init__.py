@@ -1,1 +1,2 @@
 from .empresa import service_obtener_empresas, service_obtener_empresa_por_id, service_crear_empresa
+from .persona import service_obtener_personas, service_obtener_persona_por_id, service_crear_persona
