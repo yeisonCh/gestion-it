@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from uuid import UUID
 
 class PersonaCrear(BaseModel):
     nombres: str
@@ -10,7 +11,7 @@ class PersonaCrear(BaseModel):
     email: Optional[str] = None
 
 class PersonaRespuesta(BaseModel):
-    id: int
+    id: UUID  
     nombres: str
     apellidos: str
     tipo_documento: str

@@ -8,10 +8,9 @@ class Tecnico(Base):
     __tablename__ = "tecnicos"
 
     id = Column(UNIQUEIDENTIFIER, primary_key=True, default=lambda: str(uuid.uuid4()))
-    id = Column(Integer, primary_key=True, index=True)
     especialidad = Column(String(100), nullable=True)
     tipo = Column(String(20), nullable=False)  # interno, externo
-    persona_id = Column(UNIQUEIDENTIFIER, nullable=False)
+    persona_id = Column(UNIQUEIDENTIFIER, ForeignKey("personas.id"), nullable=False)
 
-    persona = relationship("Persona", foreign_keys=[persona_id], primaryjoin="Tecnico.persona_id == Persona.id")
-    empresas = relationship("Empresa", secondary="tecnico_empresa")
+    persona = relationship("Persona", back_populates="tecnico")
+    empresas = relationship("Empresa", secondary="tecnico_empresa", back_populates="tecnicos")

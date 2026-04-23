@@ -13,8 +13,8 @@ class Usuario(Base):
     rol = Column(String(50), nullable=False)  # admin, operativo
     habilitado = Column(Boolean, default=True)
     
-    persona_id = Column(UNIQUEIDENTIFIER, nullable=False)
-    empresa_id = Column(UNIQUEIDENTIFIER, nullable=False)
+    persona_id = Column(UNIQUEIDENTIFIER, ForeignKey("personas.id"), nullable=False)
+    empresa_id = Column(UNIQUEIDENTIFIER, ForeignKey("empresas.id"), nullable=False)
 
-    persona = relationship("Persona")
-    empresa = relationship("Empresa")
+    persona = relationship("Persona", back_populates="usuario")
+    empresa = relationship("Empresa", back_populates="usuarios")

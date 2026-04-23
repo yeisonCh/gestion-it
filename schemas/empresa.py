@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from uuid import UUID
 
 class EmpresaCrear(BaseModel):
     nombre: str
@@ -10,7 +11,7 @@ class EmpresaCrear(BaseModel):
     sede: Optional[str] = None
 
 class EmpresaRespuesta(BaseModel):
-    id: int
+    id: UUID
     nombre: str
     nit: str
     direccion: Optional[str] = None

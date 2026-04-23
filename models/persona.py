@@ -1,6 +1,7 @@
 from database import Base
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.dialects.mssql import UNIQUEIDENTIFIER
+from sqlalchemy.orm import relationship
 import uuid
 
 class Persona(Base):
@@ -13,3 +14,6 @@ class Persona(Base):
     numero_documento = Column(String(20), unique=True, nullable=False)
     telefono = Column(String(20), nullable=True)
     email = Column(String(100), nullable=True)
+
+    usuario = relationship("Usuario", back_populates="persona", uselist=False)
+    tecnico = relationship("Tecnico", back_populates="persona", uselist=False)
