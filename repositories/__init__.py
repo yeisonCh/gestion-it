@@ -38,3 +38,15 @@ from .activo import (  # NUEVO
     actualizar_activo,
     eliminar_activo
 )
+from .usuario import (
+    obtener_usuarios,
+    obtener_usuario_por_id,
+    obtener_usuario_por_username,
+    obtener_usuarios_por_empresa,
+    obtener_usuarios_por_rol,
+    obtener_usuarios_habilitados,
+    crear_usuario,
+    actualizar_usuario,
+    eliminar_usuario,
+    borrar_usuario_permanentemente
+)
