@@ -37,3 +37,21 @@ from .usuario import (
     service_borrar_usuario_permanentemente,
     service_autenticar_usuario
 )
+
+from .activo import ( 
+    service_obtener_activos,
+    service_obtener_activo_por_id,
+    service_obtener_activos_por_tipo,
+    service_obtener_activos_por_empresa,
+    service_obtener_activos_por_estado,
+    service_crear_activo,
+    service_actualizar_activo,
+    service_eliminar_activo
+)
+from .ubicacion import ( 
+    service_obtener_ubicaciones,
+    service_obtener_ubicacion_por_id,
+    service_obtener_ubicaciones_por_empresa,
+    service_crear_ubicacion,
+    service_actualizar_ubicacion
+)

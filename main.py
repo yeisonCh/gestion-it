@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from database import crear_base_de_datos_si_no_existe, engine, Base
-from routers import empresa_router, persona_router, tipo_activo_router,  usuario_router
+from routers import empresa_router, persona_router, tipo_activo_router,  usuario_router,  ubicacion_router
 
 app = FastAPI()
 
@@ -14,6 +14,7 @@ app.include_router(empresa_router)
 app.include_router(persona_router)
 app.include_router(tipo_activo_router)
 app.include_router(usuario_router)
+app.include_router(ubicacion_router)
 
 @app.get("/")
 def root():
