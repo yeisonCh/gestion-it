@@ -58,3 +58,12 @@ from .ubicacion import (
     crear_ubicacion,
     actualizar_ubicacion
 )
+
+from .tecnico import (  
+    obtener_tecnico_por_id,
+    obtener_tecnico_por_persona,
+    obtener_tecnicos_por_tipo,
+    obtener_tecnicos_por_empresa,
+    crear_tecnico,
+    actualizar_tecnico
+)

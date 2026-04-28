@@ -55,3 +55,11 @@ from .ubicacion import (
     service_crear_ubicacion,
     service_actualizar_ubicacion
 )
+
+from .tecnico import ( 
+    service_obtener_tecnico_por_id,
+    service_obtener_tecnicos_por_tipo,
+    service_obtener_tecnicos_por_empresa,
+    service_crear_tecnico,
+    service_actualizar_tecnico
+)

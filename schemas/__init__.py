@@ -4,3 +4,4 @@ from .tipo_activo import CrearTipoActivo, ActualizarTipoActivo, TipoActivoRespue
 from .usuario import UsuarioCrear, UsuarioActualizar, UsuarioRespuesta, UsuarioLogin
 from .activo import ActivoCrear, ActivoActualizar, ActivoRespuesta
 from .ubicacion import UbicacionCrear, UbicacionActualizar, UbicacionRespuesta
+from .tecnico import TecnicoCrear, TecnicoActualizar, TecnicoRespuesta
