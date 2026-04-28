@@ -63,3 +63,12 @@ from .tecnico import (
     service_crear_tecnico,
     service_actualizar_tecnico
 )
+from .activo_relacion import (  # NUEVO
+    service_obtener_relaciones,
+    service_obtener_relacion_por_id,
+    service_obtener_relaciones_por_padre,
+    service_obtener_relaciones_por_hijo,
+    service_obtener_relaciones_activas,
+    service_crear_relacion,
+    service_finalizar_relacion
+)

@@ -6,3 +6,4 @@ from .activo import ActivoCrear, ActivoActualizar, ActivoRespuesta
 from .ubicacion import UbicacionCrear, UbicacionActualizar, UbicacionRespuesta
 from .tecnico import TecnicoCrear, TecnicoActualizar, TecnicoRespuesta
 from .activo_ubicacion import ActivoUbicacionCrear, ActivoUbicacionRespuesta
+from .activo_relacion import ActivoRelacionCrear, ActivoRelacionActualizar, ActivoRelacionRespuesta

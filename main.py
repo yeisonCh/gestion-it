@@ -8,7 +8,9 @@ from routers import (
     ubicacion_router, 
     activo_router, 
     tecnico_router,
-    activoUbicacion)
+    activoUbicacion,
+    activo_relacion_router
+    )
 
 app = FastAPI()
 
@@ -26,6 +28,7 @@ app.include_router(tipo_activo_router)
 app.include_router(tecnico_router)
 app.include_router(usuario_router)
 app.include_router(ubicacion_router)
+app.include_router(activo_relacion_router)
 
 @app.get("/")
 def root():

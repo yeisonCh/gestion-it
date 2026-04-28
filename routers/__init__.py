@@ -6,3 +6,4 @@ from .activo import router as activo_router
 from .ubicacion import router as ubicacion_router
 from .tecnico import router as tecnico_router
 from .activo_ubicacion import router as activoUbicacion
+from .activo_relacion import router as activo_relacion_router 

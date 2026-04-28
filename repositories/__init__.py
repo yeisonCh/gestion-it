@@ -74,3 +74,14 @@ from .activo_ubicacion import (
     crear_movimiento,
     retirar_ubicacion_actual
 )
+
+from .activo_relacion import (
+    obtener_relaciones,
+    obtener_relacion_por_id,
+    obtener_relaciones_por_padre,
+    obtener_relaciones_por_hijo,
+    obtener_relaciones_activas,
+    existe_relacion_activa,
+    crear_relacion,
+    finalizar_relacion,
+)
