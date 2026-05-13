@@ -11,7 +11,7 @@ class RolUsuario(str):
     OPERATIVO = "operativo"
 
 class UsuarioCrear(BaseModel):
-    username: str = Field(
+    username: str = Field(  
         ...,
         min_length=3,
         max_length=50,
@@ -68,7 +68,7 @@ class UsuarioCrear(BaseModel):
     @classmethod
     def validar_rol(cls, v: str) -> str:
         v = v.strip().lower()
-        if v not in ['admin', 'operativo']:
+        if v not in ['admin', 'operativo', 'tecnico']:
             raise ValueError('El rol debe ser "admin" o "operativo"')
         return v
 
@@ -97,7 +97,7 @@ class UsuarioActualizar(BaseModel):
         if v is None:
             return v
         v = v.strip().lower()
-        if v not in ['admin', 'operativo']:
+        if v not in ['admin', 'operativo', 'tecnico']:
             raise ValueError('El rol debe ser "admin" o "operativo"')
         return v
 
