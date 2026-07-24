@@ -117,7 +117,7 @@ def obtener_activos_por_empresa(
     description="Retorna todos los activos con un estado específico (activo, dañado, en_mantenimiento, baja)"
 )
 def obtener_activos_por_estado(
-    estado: str = Query(..., description="Estado del activo", example="activo"),
+    estado: str = Query(..., description="Estado del activo", examples=["activo"]),
     db: Session = Depends(get_db)
 ):
     try:

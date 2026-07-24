@@ -6,6 +6,7 @@ from models.usuario import Usuario
 from schemas.usuario import UsuarioCrear, UsuarioActualizar
 from uuid import UUID
 from typing import List, Optional
+from auth.password_handler import hash_password
 
 # Obtener todos los usuarios
 def obtener_usuarios(db: Session) -> List[Usuario]:
@@ -27,7 +28,7 @@ def obtener_usuario_por_id(db: Session, usuario_id: UUID) -> Optional[Usuario]:
 def obtener_usuario_por_username(db: Session, username: str) -> Optional[Usuario]:
     """Obtener un usuario por su username"""
     try:
-        return db.query(Usuario).filter(Usuario.username == username.lower().strip()).first()
+        return db.query(Usuario).filter(Usuario.username == username.lower().strip(), Usuario.habilitado == True).first()
     except SQLAlchemyError as e:
         raise Exception(f"Error al buscar por username: {str(e)}")
 
@@ -61,7 +62,7 @@ def crear_usuario(db: Session, usuario: UsuarioCrear) -> Usuario:
     try:
         nuevo_usuario = Usuario(
             username=usuario.username.lower().strip(),
-            password=usuario.password,  # Más adelante: hashear contraseña
+            password=hash_password(usuario.password),
             rol=usuario.rol.lower().strip(),
             habilitado=usuario.habilitado,
             persona_id=usuario.persona_id,
@@ -101,7 +102,7 @@ def actualizar_usuario(
             usuario.username = usuario_data.username.lower().strip()
         
         if usuario_data.password is not None:
-            usuario.password = usuario_data.password  # Más adelante: hashear
+            usuario.password = hash_password(usuario_data.password)
         
         if usuario_data.rol is not None:
             usuario.rol = usuario_data.rol.lower().strip()

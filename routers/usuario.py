@@ -88,7 +88,7 @@ def obtener_usuario(
     description="Retorna un usuario por su nombre de usuario"
 )
 def buscar_usuario_por_username(
-    username: str = Query(..., description="Nombre de usuario", example="jperez"),
+    username: str = Query(..., description="Nombre de usuario", examples=["jperez"]),
     db: Session = Depends(get_db)
 ):
     try:
@@ -138,7 +138,7 @@ def obtener_usuarios_por_empresa(
     description="Retorna todos los usuarios con un rol específico (admin/operativo)"
 )
 def obtener_usuarios_por_rol(
-    rol: str = Query(..., description="Rol del usuario", example="operativo"),
+    rol: str = Query(..., description="Rol del usuario", examples=["operativo"]),
     db: Session = Depends(get_db)
 ):
     try:

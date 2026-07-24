@@ -3,12 +3,14 @@
 from pydantic import BaseModel, Field, field_validator, EmailStr
 from typing import Optional
 from uuid import UUID
+from enum import Enum
 import re
 
 # Enum para roles (como en .NET)
-class RolUsuario(str):
+class RolUsuario(str, Enum):
     ADMIN = "admin"
     OPERATIVO = "operativo"
+    TECNICO = "tecnico"
 
 class UsuarioCrear(BaseModel):
     username: str = Field(  
@@ -25,10 +27,10 @@ class UsuarioCrear(BaseModel):
         description="Contraseña (mínimo 6 caracteres)",
         example="miPassword123"
     )
-    rol: str = Field(
+    rol: RolUsuario = Field(
         ...,
-        description="Rol del usuario: admin o operativo",
-        example="operativo"
+        description="Rol del usuario",
+        examples=["operativo"]
     )
     habilitado: bool = Field(
         default=True,
@@ -63,7 +65,9 @@ class UsuarioCrear(BaseModel):
         if not v or len(v) < 6:
             raise ValueError('La contraseña debe tener al menos 6 caracteres')
         return v
-    
+
+    """
+    Un validador que se usaba antes de implementar en str, enum en la declaración del usuarioi
     @field_validator('rol')
     @classmethod
     def validar_rol(cls, v: str) -> str:
@@ -71,6 +75,7 @@ class UsuarioCrear(BaseModel):
         if v not in ['admin', 'operativo', 'tecnico']:
             raise ValueError('El rol debe ser "admin" o "operativo"')
         return v
+    """
 
 
 class UsuarioActualizar(BaseModel):
