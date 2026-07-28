@@ -15,7 +15,7 @@ from repositories.usuario import (
 )
 from repositories.persona import obtener_persona_por_id
 from repositories.empresa import obtener_empresa_por_id
-from schemas.usuario import UsuarioCrear, UsuarioActualizar, UsuarioLogin
+from schemas.usuario import UsuarioCrear, UsuarioActualizar
 from uuid import UUID
 from typing import List, Optional
 
@@ -139,25 +139,3 @@ def service_borrar_usuario_permanentemente(db: Session, usuario_id: UUID):
         raise Exception(f"Usuario con ID {usuario_id} no encontrado")
     
     return borrar_usuario_permanentemente(db, usuario_id)
-
-# Autenticación de usuario (para login)
-def service_autenticar_usuario(db: Session, login_data: UsuarioLogin):
-    """
-    Autenticar un usuario por username y password
-    - Valida que el usuario existe
-    - Valida que la contraseña sea correcta
-    - Valida que el usuario esté habilitado
-    """
-    usuario = obtener_usuario_por_username(db, login_data.username)
-    
-    if not usuario:
-        raise Exception("Usuario o contraseña incorrectos")
-    
-    if not usuario.habilitado:
-        raise Exception("Usuario deshabilitado. Contacte al administrador")
-    
-    # TODO: Verificar hash de contraseña (lo haremos después)
-    if usuario.password != login_data.password:
-        raise Exception("Usuario o contraseña incorrectos")
-    
-    return usuario

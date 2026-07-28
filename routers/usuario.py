@@ -9,8 +9,7 @@ from database import get_db
 from schemas.usuario import (
     UsuarioCrear, 
     UsuarioActualizar, 
-    UsuarioRespuesta, 
-    UsuarioLogin
+    UsuarioRespuesta
 )
 from services.usuario import (
     service_obtener_usuarios,
@@ -22,8 +21,7 @@ from services.usuario import (
     service_crear_usuario,
     service_actualizar_usuario,
     service_eliminar_usuario,
-    service_borrar_usuario_permanentemente,
-    service_autenticar_usuario
+    service_borrar_usuario_permanentemente
 )
 
 router = APIRouter(
@@ -88,7 +86,7 @@ def obtener_usuario(
     description="Retorna un usuario por su nombre de usuario"
 )
 def buscar_usuario_por_username(
-    username: str = Query(..., description="Nombre de usuario", example="jperez"),
+    username: str = Query(..., description="Nombre de usuario", examples=["jperez"]),
     db: Session = Depends(get_db)
 ):
     try:
@@ -138,7 +136,7 @@ def obtener_usuarios_por_empresa(
     description="Retorna todos los usuarios con un rol específico (admin/operativo)"
 )
 def obtener_usuarios_por_rol(
-    rol: str = Query(..., description="Rol del usuario", example="operativo"),
+    rol: str = Query(..., description="Rol del usuario", examples=["operativo"]),
     db: Session = Depends(get_db)
 ):
     try:
@@ -171,6 +169,7 @@ def obtener_usuarios_habilitados(
 
 
 # POST: /usuarios/login (autenticación)
+"""
 @router.post(
     "/login",
     response_model=UsuarioRespuesta,
@@ -189,6 +188,7 @@ def login(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=str(e)
         )
+"""
 
 
 # POST: /usuarios
