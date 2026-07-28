@@ -29,7 +29,7 @@ class UsuarioCrear(BaseModel):
     )
     rol: RolUsuario = Field(
         ...,
-        description="Rol del usuario",
+        description="Rol del usuario (admin, operativo o tecnico)",
         examples=["operativo"]
     )
     habilitado: bool = Field(
@@ -82,7 +82,7 @@ class UsuarioActualizar(BaseModel):
     """Para actualizar usuario (todos los campos opcionales)"""
     username: Optional[str] = Field(None, min_length=3, max_length=50)
     password: Optional[str] = Field(None, min_length=6, max_length=100)
-    rol: Optional[str] = None
+    rol: Optional[RolUsuario] = None
     habilitado: Optional[bool] = None
     persona_id: Optional[UUID] = None
     empresa_id: Optional[UUID] = None
@@ -95,7 +95,7 @@ class UsuarioActualizar(BaseModel):
         if not v.strip():
             raise ValueError('El nombre de usuario no puede estar vacío')
         return v.strip().lower()
-    
+    """
     @field_validator('rol')
     @classmethod
     def validar_rol(cls, v: Optional[str]) -> Optional[str]:
@@ -105,6 +105,7 @@ class UsuarioActualizar(BaseModel):
         if v not in ['admin', 'operativo', 'tecnico']:
             raise ValueError('El rol debe ser "admin" o "operativo"')
         return v
+    """
 
 
 class UsuarioRespuesta(BaseModel):
@@ -118,9 +119,3 @@ class UsuarioRespuesta(BaseModel):
     
     class Config:
         from_attributes = True
-
-
-class UsuarioLogin(BaseModel):
-    """Para autenticación"""
-    username: str
-    password: str

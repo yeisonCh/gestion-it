@@ -34,8 +34,7 @@ from .usuario import (
     service_crear_usuario,
     service_actualizar_usuario,
     service_eliminar_usuario,
-    service_borrar_usuario_permanentemente,
-    service_autenticar_usuario
+    service_borrar_usuario_permanentemente
 )
 
 from .activo import ( 
@@ -71,4 +70,8 @@ from .activo_relacion import (  # NUEVO
     service_obtener_relaciones_activas,
     service_crear_relacion,
     service_finalizar_relacion
+)
+
+from .auth_service import (
+    autenticar_usuario,
 )
