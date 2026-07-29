@@ -4,6 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException, status, Query
 from sqlalchemy.orm import Session
 from uuid import UUID
 from typing import List, Optional
+from auth.dependencies import require_roles
+from models.usuario import Usuario
+
 
 from database import get_db
 from schemas.usuario import (
@@ -38,7 +41,10 @@ router = APIRouter(
     summary="Obtener todos los usuarios",
     description="Retorna una lista con todos los usuarios registrados"
 )
-def listar_usuarios(db: Session = Depends(get_db)):
+def listar_usuarios(
+    db: Session = Depends(get_db), 
+    current_user = Depends(require_roles("admin", "tecnico"))
+):
     try:
         return service_obtener_usuarios(db)
     except Exception as e:
@@ -58,7 +64,8 @@ def listar_usuarios(db: Session = Depends(get_db)):
 )
 def obtener_usuario(
     usuario_id: UUID,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin", "tecnico"))
 ):
     try:
         usuario = service_obtener_usuario_por_id(db, usuario_id)
@@ -87,7 +94,8 @@ def obtener_usuario(
 )
 def buscar_usuario_por_username(
     username: str = Query(..., description="Nombre de usuario", examples=["jperez"]),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin", "tecnico"))
 ):
     try:
         usuario = service_obtener_usuario_por_username(db, username)
@@ -116,7 +124,8 @@ def buscar_usuario_por_username(
 )
 def obtener_usuarios_por_empresa(
     empresa_id: UUID = Query(..., description="ID de la empresa"),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin", "tecnico"))
 ):
     try:
         return service_obtener_usuarios_por_empresa(db, empresa_id)
@@ -137,7 +146,8 @@ def obtener_usuarios_por_empresa(
 )
 def obtener_usuarios_por_rol(
     rol: str = Query(..., description="Rol del usuario", examples=["operativo"]),
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin"))
 ):
     try:
         return service_obtener_usuarios_por_rol(db, rol)
@@ -157,7 +167,8 @@ def obtener_usuarios_por_rol(
     description="Retorna solo los usuarios habilitados"
 )
 def obtener_usuarios_habilitados(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin", "tecnico"))
 ):
     try:
         return service_obtener_usuarios_habilitados(db)
@@ -201,7 +212,8 @@ def login(
 )
 def crear_usuario(
     usuario: UsuarioCrear, 
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin"))
 ):
     try:
         return service_crear_usuario(db, usuario)
@@ -233,7 +245,8 @@ def crear_usuario(
 def actualizar_usuario(
     usuario_id: UUID,
     usuario_data: UsuarioActualizar,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin"))
 ):
     try:
         resultado = service_actualizar_usuario(db, usuario_id, usuario_data)
@@ -271,7 +284,8 @@ def actualizar_usuario(
 )
 def eliminar_usuario(
     usuario_id: UUID,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin"))
 ):
     try:
         resultado = service_eliminar_usuario(db, usuario_id)
@@ -299,7 +313,8 @@ def eliminar_usuario(
 )
 def borrar_usuario_permanentemente(
     usuario_id: UUID,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db), 
+    current_user: Usuario = Depends(require_roles("admin"))
 ):
     try:
         resultado = service_borrar_usuario_permanentemente(db, usuario_id)
