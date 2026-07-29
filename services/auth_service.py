@@ -21,6 +21,6 @@ def autenticar_usuario(
         return None
 
     return {
-        "access_token": create_access_token({"sub": usuario.username}),
+        "access_token": create_access_token({"sub": usuario.username, "rol": usuario.rol}),
         "token_type": "bearer"
     }
